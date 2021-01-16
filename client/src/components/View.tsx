@@ -87,13 +87,22 @@ const View: React.FC<NoteProps> = ({ match }) => {
         NotesService.delete(noteId).then(
             (res: any) => {
                 // reset form
-                setNoteId(0);
-                setTitle("");
-                setBody("");
+                    setNoteId(0);
+                    setTitle("");
+                    setBody("");
                 // reset window url
                 let url:string = window.location.href.split("/")[0] + "/add";
                 window.history.pushState(null, title, url);
             });
+    }
+    const newNote = (event: any) => {
+        event.preventDefault();
+        setNoteId(0);
+        setTitle("");
+        setBody("");
+        // reset window url
+        let url:string = window.location.href.split("/")[0] + "/add";
+        window.history.pushState(null, title, url);
     }
 
     return (
@@ -120,7 +129,7 @@ const View: React.FC<NoteProps> = ({ match }) => {
                 </div>
                 <div className="d-flex my-2">
                     {noteId > 0 &&
-                            <Link to={"/add"} className="btn btn-sm btn-info">New Note</Link>
+                        <button className="btn btn-sm btn-info" onClick={newNote}>New Note</button>
                     }
                     <div className="ml-auto">
                         {noteId > 0 &&
