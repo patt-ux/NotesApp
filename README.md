@@ -12,7 +12,7 @@ A no-frills, self contained notes application and lightweight node api for takin
     * PUT `/api/notes/{id}` updates a specific note
     * DELETE `/api/notes` deletes all notes
     * DELETE `/api/notes/{id}` deletes a specific note
-* React UI for humans to easily view, edit and delete notes.
+* React UI for humans to easily create, view, edit and delete notes without needing to download Postman or similar API apps.
     * Uses Bootstrap 4 CSS library for mobile first design
 
 ## About the folder structure

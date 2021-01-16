@@ -44,13 +44,13 @@ function List() {
 
   return (
       <div>
-        <div className="d-flex p-2">
+        <div className="d-flex pl-2 my-2">
           <h1 className="font-weight-bold" style={{fontSize:"1.25rem"}}>All Notes</h1>
           <div className="ml-auto">
-            <Link className="btn btn-sm btn-primary" to={"/add"}>Add Note</Link>
             {notes.length > 0 &&
                 <button className="btn btn-sm btn-danger" onClick={deleteAll}>Delete All</button>
             }
+            <Link className="btn btn-sm btn-primary ml-1" to={"/add"}>Add Note</Link>
           </div>
         </div>
         <table className="table table-striped border">
@@ -72,13 +72,13 @@ function List() {
                   <tr key={note.id}>
                     <td>
                       <div className="d-flex">
-                        <div className="font-weight-bold text-uppercase">{note.title}</div>
+                        <div className="font-weight-bold">{note.title}</div>
                         <div className="ml-auto">
-                          <Link className="btn btn-sm btn-primary mx-2" to={'/' + note.id}>Edit</Link>
-                          <button className="btn btn-sm btn-danger" onClick={() => deleteNote(note.id)}>Delete</button>
+                          <button className="btn btn-sm btn-danger mx-2" onClick={() => deleteNote(note.id)}>Delete</button>
+                          <Link className="btn btn-sm btn-primary" to={'/' + note.id}>Edit</Link>
                         </div>
                       </div>
-                      <div>{note.body}</div>
+                      <div className="my-2 p-2 border">{note.body}</div>
                     </td>
                   </tr>
                   )

@@ -3,6 +3,7 @@ import {  BrowserRouter as Router,Switch, Route, Link} from "react-router-dom";
 import View from './components/View';
 import List from './components/List';
 import "bootstrap/dist/css/bootstrap.min.css";
+import logo from './logo.png';
 
 // requirements:
 /**
@@ -19,7 +20,7 @@ function App() {
     <Router>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
-          Notes App
+          <img src={logo} alt="Notes App"/> Notes App
         </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">

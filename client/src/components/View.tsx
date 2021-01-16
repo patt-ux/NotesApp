@@ -117,10 +117,15 @@ const View: React.FC<NoteProps> = ({ match }) => {
                     <small className="text-secondary">Plain text notes. Markup not supported.</small>
                 </div>
                 <div className="d-flex my-2">
-                    <button className="btn btn-sm btn-primary mr-2" onClick={handleSubmit}>Save Note</button>
                     {noteId > 0 &&
-                        <button className="btn btn-sm btn-danger" onClick={deleteNote}>Delete Note</button>
+                            <Link to={"/add"} className="btn btn-sm btn-info">New Note</Link>
                     }
+                    <div className="ml-auto">
+                        {noteId > 0 &&
+                            <button className="btn btn-sm btn-danger" onClick={deleteNote}>Delete Note</button>
+                        }
+                        <button className="btn btn-sm btn-primary ml-2" onClick={handleSubmit}>Save {noteId > 0 ? "Changes": "Note"}</button>
+                    </div>
                 </div>
             </form>
         </React.Fragment>
