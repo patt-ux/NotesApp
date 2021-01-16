@@ -1,4 +1,5 @@
 # NotesApp
+## About this App
 A no-frills, self contained notes application and lightweight node api for taking simple notes.
 * Mini-API server built with Node, Express, LowDB to handle persisting and CRUD operations.
     * Each note has the properties id (integer), title (string), body (string):
@@ -14,13 +15,14 @@ A no-frills, self contained notes application and lightweight node api for takin
     * DELETE `/api/notes/{id}` deletes a specific note
 * React UI for humans to easily create, view, edit and delete notes without needing to download Postman or similar API apps.
     * Uses Bootstrap 4 CSS library for mobile first design
+    * Created using the create-react-app typescript template
 
 ## About the folder structure
 * The root folder contains necessary files for mini-api:
     * package.json
     * server.js
     * db.json contains persisted data and is created automatically by the server on run.
-* `/client` folder contains necessary files for the React UI. This was created using the create-react-app typescript template.
+* `/client` folder contains necessary files for the React UI.
 
 ## Getting Started
 1. You will Need to have Node installed.
