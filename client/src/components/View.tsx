@@ -47,16 +47,17 @@ const View: React.FC<NoteProps> = ({ match }) => {
     // submit handler
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        console.log(noteId);
-        // this is an existing note
-        if (noteId > 0) {
-            await updateNote();
+        // check that the title is at least 3 characters long
+        if(title.length > 2) {
+            // this is an existing note
+            if (noteId > 0) {
+                await updateNote();
+            }
+            // create a new note
+            if (noteId === 0) {
+                await createNote();
+            }
         }
-        // create a new note
-        if (noteId === 0) {
-            await createNote();
-        }
-        console.log("moo");
     }
 
     // create a note
@@ -108,13 +109,14 @@ const View: React.FC<NoteProps> = ({ match }) => {
             </div>
             <form className="note-form p-2">
                 <div className="form-group">
-                    <label>Title</label>
-                    <input className="form-control" type="text" value={title} onChange={(e) => { setTitle(e.target.value) }} />
+                    <label>Title <span className="text-danger">*</span></label>
+                    <input maxLength={150} tabIndex={1} className="form-control" type="text" value={title} onChange={(e) => { setTitle(e.target.value) }} />
+                    <small className="text-secondary" style={{fontSize:".7rem"}}>Minimum 3 characters</small>
                 </div>
                 <div className="form-group">
                     <label>Body</label>
-                    <textarea className="form-control" value={body} onChange={(e) => { setBody(e.target.value) }}></textarea>
-                    <small className="text-secondary">Plain text notes. Markup not supported.</small>
+                    <textarea className="form-control" tabIndex={2} value={body} onChange={(e) => { setBody(e.target.value) }}></textarea>
+                    <small className="text-secondary" style={{fontSize:".7rem"}}>Plain text notes only please</small>
                 </div>
                 <div className="d-flex my-2">
                     {noteId > 0 &&
@@ -124,7 +126,7 @@ const View: React.FC<NoteProps> = ({ match }) => {
                         {noteId > 0 &&
                             <button className="btn btn-sm btn-danger" onClick={deleteNote}>Delete Note</button>
                         }
-                        <button className="btn btn-sm btn-primary ml-2" onClick={handleSubmit}>Save {noteId > 0 ? "Changes": "Note"}</button>
+                        <button className={"btn btn-sm btn-primary ml-2 " + (title.length < 3 ? "disabled":"")} tabIndex={3} disabled={title.length < 3} onClick={handleSubmit}>Save {noteId > 0 ? "Changes": "Note"}</button>
                     </div>
                 </div>
             </form>

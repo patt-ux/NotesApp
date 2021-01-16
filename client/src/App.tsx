@@ -3,6 +3,7 @@ import {  BrowserRouter as Router,Switch, Route, Link} from "react-router-dom";
 import View from './components/View';
 import List from './components/List';
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import logo from './logo.png';
 
 // requirements:
