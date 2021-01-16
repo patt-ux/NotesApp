@@ -2,9 +2,9 @@
 A no-frills, self contained notes application and lightweight node api for taking simple notes.
 * Mini-API server built with Node, Express, LowDB to handle persisting and CRUD operations.
     * Each note has the properties id (integer), title (string), body (string):
-        * `{"id":0, "title":"A Title", "body": "A Body"}
-        * Note id field is incremented based on last note in DB. This is to prevent duplicates. All note DBs start at id 1.
-        * title requires at least 3 characters for note creation
+        * `{"id":0, "title":"A Title", "body": "A Body"}`
+        * Note id field is incremented based on last note in DB. This is to prevent duplicates. Ids for notes start at 1.
+        * title requires at least 3 characters for note creation or update
         * body can be blank - sometimes you just need a placeholder note
     * GET `/api/notes` returns all notes
     * GET `/api/notes/{id}` returns a specific note

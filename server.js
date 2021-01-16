@@ -28,36 +28,44 @@ low(adapter).then(db => {
     // POST
     // create a note
     app.post('/api/notes', (req, res) => {
-        const note = db.get('notes').last().value();
-        // setting note id to 1 more than last id in array.
-        // not using index or count to avoid duplicate ids
-        var noteId = 1; // init note ids at 1 for humans
-        if(note) {noteId = note.id + 1;}
-        db.get('notes')
-            .push(req.body)
-            .last()
-            .assign({ id: noteId, title: req.body.title, body: req.body.body })
-            .write()
-            .then(note => res.send(note));
+        // check that there are at least 3 characters in the title
+        if(req.body.title.length > 2) {
+            const note = db.get('notes').last().value();
+            // setting note id to 1 more than last id in array.
+            // not using index or count to avoid duplicate ids
+            var noteId = 1; // init note ids at 1 for humans
+            if(note) {noteId = note.id + 1;}
+            db.get('notes')
+                .push(req.body)
+                .last()
+                .assign({ id: noteId, title: req.body.title, body: req.body.body })
+                .write()
+                .then(note => res.send(note));
+        } else {
+            throw new Error("title requires at least 3 characters");
+        }
     });
 
     // PUT 
     // update a specfic note
     app.put('/api/notes/:id', (req, res) => {
         if(req.params.id) {
-            try{
-                db.get('notes').find({ id: parseInt(req.params.id)}).assign({ title: req.body.title, body: req.body.body }).write();
-            } catch(e) {
-                throw new Error("unable to find note for update");
+            if(req.body.title.length > 2) {
+                try{
+                    db.get('notes').find({ id: parseInt(req.params.id)}).assign({ title: req.body.title, body: req.body.body }).write();
+                } catch(e) {
+                    throw new Error("unable to find note for update");
+                }
+                // search the array again to fix weird caching
+                const note = db.get('notes').find({ id: parseInt(req.params.id)}).value();
+                res.send(note);
+            } else {
+                throw new Error("title requires at least 3 characters");
             }
-            // search the array again to fix weird caching
-            const note = db.get('notes').find({ id: parseInt(req.params.id)}).value();
-            res.send(note);
         } else {
             throw new Error("note id is required");
         }
     });
-
 
     // DELETE 
     // delete all notes
